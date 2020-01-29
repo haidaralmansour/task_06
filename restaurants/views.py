@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Restaurant
 from .forms import RestaurantForm
 
@@ -20,13 +20,11 @@ def restaurant_detail(request, restaurant_id):
 
 def restaurant_create(request):
     form = RestaurantForm()
-    if request.method == "post":
-        form = RestaurantForm(request.post)
+    if request.method == "POST":
+        form = RestaurantForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('restaurant_list')
-
-
+            return redirect('restaurant-list')
     context = {
         "form": form
 
